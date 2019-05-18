@@ -5,10 +5,10 @@ import xlrd
 import pandas as pd
 from functools import reduce
 
-wb = xlrd.open_workbook("D:\PyLessons\PyTest1.xlsx")#»ñÈ¡Ò»¸ösheet¶ÔÏó
+wb = xlrd.open_workbook("D:\PyLessons\PyTest1.xlsx")#è·å–ä¸€ä¸ªsheetå¯¹è±¡
 sheet1 = wb.sheets()[0]
-nrows = sheet1.nrows#»ñÈ¡sheetµÄĞĞÊı
-#»ñÈ¡sheetÖĞËùÓĞĞĞ
+nrows = sheet1.nrows
+
 def GetRows(sheet1):
     N = []
     
@@ -16,15 +16,14 @@ def GetRows(sheet1):
         N.append(sheet1.row_values(x))
     return N
 
-S = GetRows(sheet1) #S¼´ÁĞ±íĞÎÊ½µÄ·ÑÓÃÃ÷Ï¸µ¥£¬×÷Îª·ÖÂ¼Ê×ĞĞµÄÊäÈë
+S = GetRows(sheet1) #Så³åˆ—è¡¨å½¢å¼çš„è´¹ç”¨æ˜ç»†å•ï¼Œä½œä¸ºåˆ†å½•é¦–è¡Œçš„è¾“å…¥
 
-#Ê×ĞĞ»á¼Æ·ÖÂ¼£¨Ò²¼´ÊÇÃ÷Ï¸µ¥ÖĞµÄÒ»ĞĞ£©Entry1 = ["1", "2", "TrafficExpense", "6602008", 396.00, 0.00]£¬½á¹¹Îª
-#¡¾±àºÅ£¬¸½¼şÊı£¬ÕªÒª£¬¿ÆÄ¿±àÂë£¬´û·½½ğ¶î¡¿
 
-def GenVouch(Entry1):#Éú³ÉºóĞø·ÖÂ¼ĞĞ£¬ÏÈÖ»¿¼ÂÇ×î¼òµ¥µÄ·ÑÓÃÒµÎñ£¬½è·ÑÓÃ´ûÒøĞĞ
+
+def GenVouch(Entry1):
     Entry2 = [Entry1[0], Entry1[1], Entry1[2], "1002001002", 0.00, Entry1[4]]
-    return Entry1,Entry2 #¸ù¾İ¿ÆÄ¿²»Í¬£¬¿ÉÒÔÓÃifÓï¾ä×ö¼¸¸ö·ÖÖ§£¬Èç¹¤×Ê»ò¸£Àû·ÑÆ¾Ö¤¿ÉÄÜÓĞ4ĞĞ·ÖÂ¼
-#ÒÔÉÏ»ñÈ¡µÄ»á¼ÆÆ¾Ö¤ÎªÒ»¸ötuple£¬Ôª×éÖĞµÄÃ¿Ò»¸öÔªËØÎªÒ»¸ölist,½á¹¹²Î¿¼Entry1£¬½ÓÏÂÀ´½«Õû¸öÔª×éÁĞ±í»¯£º
+    return Entry1,Entry2
+
 def Vouch():
     Voucher = GenVouch(Entry1)
     L = []
@@ -33,9 +32,8 @@ def Vouch():
 X=[]
 for Entry1 in S:
     X.append(L)
-#ÁĞ±í»¯ºóµÄLÊÇÒ»¸öÈıÖØlist:L±¾ÉíÊÇÒ»¸ölist,LÖĞµÄÃ¿Ò»¸öÔªËØ£¨»á¼ÆÆ¾Ö¤£©ÊÇlist,ÆäÖĞµÄÃ¿Ò»¸öÔªËØ£¨·ÖÂ¼ĞĞ£©ÈÔÈ»ÊÇlist
-#ÎªÁË±ãÓÚÍ¨¹ıpandasÉú³É¡°Êı¾İÖ¡¡±£¨DataFrame£©µÄÊı¾İ½á¹¹²¢Êä³öµ½excel(Ö÷ÒªÄ¿µÄ£©£¬ĞèÒª½«Æ¾Ö¤¼¶±ğµÄlistºÏ²¢£¬¶ø
-#pythonµÄlistÓÃ¼Ó·¨¾Í¿ÉÒÔÊµÏÖºÏ²¢ÁË£¬Ê¹ÓÃ×î¸ßĞ§µÄreduceº¯Êı¼´¿ÉÍê³É
+
+    
 XX=reduce(lambda x,y: x+y,X)
 XX
 df = pd.DataFrame(XX)
