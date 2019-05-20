@@ -31,7 +31,7 @@ def Vouch():
         L.append(item)
 X=[]
 for Entry1 in S:
-    X.append(L)
+    X.append(Vouch())
 
     
 XX=reduce(lambda x,y: x+y,X)
