@@ -18,22 +18,28 @@ def GetRows(sheet1):
 
 S = GetRows(sheet1) #S即列表形式的费用明细单，作为分录首行的输入
 
-
-
-def GenVouch(Entry1):
-    Entry2 = [Entry1[0], Entry1[1], Entry1[2], "1002001002", 0.00, Entry1[4]]
-    return Entry1,Entry2
-
-def Vouch():
-    Voucher = GenVouch(Entry1)
+def vouch(Entry):
+    def genvouch(Entry):
+        if ("6602002" or "6602003") in Entry[3]: 
+            Entry1 = [Entry[0], Entry[1], Entry[2], Entry[3], Entry[4], 0.00]
+            Entry2 = [Entry[0], Entry[1], Entry[2], "2211" + Entry[3][4:], 0.00, Entry[4]]
+            Entry3 = [Entry[0], Entry[1], Entry[2], "2211" + Entry[3][4:], Entry[4], 0.00]
+            Entry4 = [Entry[0], Entry[1], Entry[2], "1002001002", 0.00, Entry[4]]
+            return Entry1, Entry2, Entry3, Entry4
+        else:
+            Entry1 = [Entry[0], Entry[1], Entry[2], Entry[3], Entry[4], 0.00]
+            Entry2 = [Entry[0], Entry[1], Entry[2], "1002001002", 0.00, Entry[4]]
+            return Entry1, Entry2
+    voucher = genvouch(Entry)
     L = []
-    for item in Voucher:
+    for item in voucher:
         L.append(item)
-X=[]
-for Entry1 in S:
-    X.append(Vouch())
+    return L
 
-    
+X=[]
+for Entry in S:
+    X.append(vouch(Entry))
+
 XX=reduce(lambda x,y: x+y,X)
 XX
 df = pd.DataFrame(XX)
