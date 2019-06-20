@@ -1,6 +1,5 @@
-###
-###
-###
+#利用著名的attrs库的实现
+'''
 from attr import attrs, attrib, fields, validators
 
 @attrs
@@ -17,12 +16,11 @@ if __name__ == '__main__':
     print(journalentry)
 
 journalentry.__dict__
-###
-###
-###
+'''
 
-#利用stdlib的实现
+#利用stdlib中dataclass的实现
 from dataclasses import dataclass
+
 @dataclass(init=True, repr=True, eq=True, order=True,unsafe_hash=False, frozen=False)
 class JournalEntry(object):
     fcode: int
