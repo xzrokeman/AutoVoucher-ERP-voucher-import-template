@@ -10,6 +10,12 @@
 2. 针对不同的分录科目生成多行后续分录（如需要走中间科目“应付职工薪酬”的情形），这一块儿现在是通过不同分支写死分录来实现的，因为还没有想清楚构建一个什么框架来反映这类业务的实质。先利用pandas和xslxwriter对表格的操作做一些简单的预处理，达到目的即可；
 3. 从Anaconda Navigator启动的VScode环境变量有问题，导致pymssql库无法运行；
 4. pyodbc操作sqlserver已经测通。
+5. 尝试通过SQLAlchemy创建一个MySQL数据库来记载银行流水，然后再通过银行日记账分录`class JournalEntry`补充费用类型、进项税额后生成凭证分录`class VoucherEntry`
+6. 无论是通过原生Python还是通过SQLAlchemy来定义上述两个类都比较繁琐，偶然看到了attrs库的介绍，所以做了一些改进；由于Python的类可以很方便地字典化，所以总体思路调整为：
+（1） 运用@attrs迅速定义出两个类
+（2） 将JournalEntry字典化（dict），利用pandas生成DataFrame
+（3） 后续数据库操作可以考虑使用SQLAlchemy
+（4） 考虑为批量导入银行日记账写一个方法（20190620）
 
 ## Todo:
 
