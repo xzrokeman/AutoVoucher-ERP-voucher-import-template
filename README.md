@@ -8,11 +8,11 @@
 
 1. 已经实现最简单的费用根据流水（from Excel）生成两行的凭证（借费用贷银行）并追加到一个凭证序时簿（to Excel）；
 2. 针对不同的分录科目生成多行后续分录（如需要走中间科目“应付职工薪酬”的情形），这一块儿现在是通过不同分支写死分录来实现的，因为还没有想清楚构建一个什么框架来反映这类业务的实质。先利用pandas和xslxwriter对表格的操作做一些简单的预处理，达到目的即可；
-3. 无论是通过原生Python还是通过SQLAlchemy来定义上述两个类都比较繁琐，偶然看到了attrs库的介绍，所以做了一些改进；由于Python的类可以很方便地字典化，所以总体思路调整为：
-（1） 运用@attrs迅速定义出两个类
-（2） 将JournalEntry字典化（dict），利用pandas生成DataFrame
-（3） 后续数据库操作可以考虑使用SQLAlchemy
-（4） 考虑为批量导入银行日记账写一个方法（20190620）
+3. 无论是通过原生Python还是通过SQLAlchemy来定义上述两个类都比较繁琐，偶然看到了attrs, dataclasses库的介绍，所以做了一些改进；由于Python的类可以很方便地字典化，所以总体思路调整为：
+    i. 运用@attrs或@dataclasses定义类
+    ii. 将JournalEntry类属性字典化（vars），利用pandas生成DataFrame
+    iii. 后续数据库操作可以考虑使用SQLAlchemy
+    iiii. 考虑为批量excel导入银行日记账写一个方法（20190620）
 
 ## Todo:
 
