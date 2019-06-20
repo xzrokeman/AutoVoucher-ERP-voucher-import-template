@@ -1,3 +1,6 @@
+###
+###
+###
 from attr import attrs, attrib, fields, validators
 
 @attrs
@@ -14,3 +17,24 @@ if __name__ == '__main__':
     print(journalentry)
 
 journalentry.__dict__
+###
+###
+###
+
+#利用stdlib的实现
+from dataclasses import dataclass
+@dataclass(init=True, repr=True, eq=True, order=True,unsafe_hash=False, frozen=False)
+class JournalEntry(object):
+    fcode: int
+    fattachment: int
+    fabstract: str
+    faccount: int
+    fdebit: float
+    fcredit: float
+    
+    
+if __name__ == '__main__':
+    journalentry = JournalEntry(1, 3,"广交会差旅费", 6602008, 540.00, 0.00 )
+    print(journalentry)
+
+vars(journalentry)
