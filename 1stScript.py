@@ -20,7 +20,7 @@ S = GetRows(sheet1) #S即列表形式的费用明细单，作为分录首行的�
 
 def vouch(Entry):
     def genvouch(Entry):
-        if ("6602002" or "6602003") in Entry[3]: 
+        if ("6602002" in Entry[3]) or ("6602003" in Entry[3]):      #处理需要过应付职工薪酬的费用科目，这样的凭证会多出两行分录
             Entry1 = [Entry[0], Entry[1], Entry[2], Entry[3], Entry[4], 0.00]
             Entry2 = [Entry[0], Entry[1], Entry[2], "2211" + Entry[3][4:], 0.00, Entry[4]]
             Entry3 = [Entry[0], Entry[1], Entry[2], "2211" + Entry[3][4:], Entry[4], 0.00]
