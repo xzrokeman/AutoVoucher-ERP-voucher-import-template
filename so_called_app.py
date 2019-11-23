@@ -6,7 +6,6 @@ from decimal import *
 from dataclasses import dataclass
 from typing import Optional, List
 
-# 首先计算仲裁费，分案件适用规则类型讨论
 @dataclass
 class Rate(object):
     start: Optional[float]
@@ -15,7 +14,7 @@ class Rate(object):
     base: float
 
 
-# 普通程序处理费率表CaseType=1
+
 handling_fee_rate = [
     Rate(None, 1000, 0, 100),
     Rate(1000, 50000, 0.05, 100),
@@ -25,7 +24,7 @@ handling_fee_rate = [
     Rate(500000, 1000000, 0.01, 13550),
     Rate(1000000, None, 0.005, 18550),
 ]
-# 普通程序受理费率表CaseType=1
+
 acceptance_fee_rate = [
     Rate(None, 200000, 0, 8000),
     Rate(200000, 500000, 0.02, 8000),
@@ -38,7 +37,6 @@ acceptance_fee_rate = [
     Rate(40000000, None, 0.0015, 131000),
 ]
 
-# 国际、涉外或涉港澳台案件仲裁费率表CaseType=2
 foreign_case_fee_rate = [
     Rate(None, 1000000, 0.035, 0),
     Rate(1000000, 5000000, 0.025, 35000),
@@ -56,7 +54,7 @@ other_arbitration_rule_fee_rate = [
     Rate(50000000, None, 0.002, 244000),
 ]
 
-# 金融案件受理费率表CaseType=4
+
 financial_loan_arbitration_acceptance_fee_rate = [
     Rate(None, 1000, 0, 100),
     Rate(1000, 50000, 0.05, 100),
@@ -67,7 +65,7 @@ financial_loan_arbitration_acceptance_fee_rate = [
     Rate(1000000, None, 0.005, 18550),
 ]
 
-# 金融案件处理费率表CaseType=4
+
 financial_loan_arbitration_handling_fee_rate = [
     Rate(None, 400000, 0, 5000),
     Rate(400000, 1000000, 0.008, 5000),
@@ -79,21 +77,10 @@ financial_loan_arbitration_handling_fee_rate = [
     Rate(50000000, None, 0, 112800),
 ]
 
-# 适用《联合国国际贸易法委员会仲裁规则》案件的费用因与争议金额没有直接联系，此处暂不考虑
+
 
 arbitral_tribunal_remuneration_rate = [
-    Rate(None, 20000, 0, 13200),
-    Rate(20000, 50000, 0.385, 13200),
-    Rate(50000, 100000, 0.275, 24750),
-    Rate(100000, 150000, 0.231, 38500),
-    Rate(150000, 200000, 0.187, 50050),
-    Rate(200000, 250000, 0.176, 59400),
-    Rate(250000, 300000, 0.165, 68200),
-    Rate(300000, 400000, 0.143, 76450),
-    Rate(400000, 500000, 0.132, 90750),
-    Rate(500000, 1000000, 0.121, 103950),
-    Rate(1000000, 10000000, 0.099, 164450),
-    Rate(10000000, None, 0.033, 1055450),
+    
 ]
 
 # AID stands for "Amount in dispute"
@@ -114,10 +101,7 @@ def count_fee(AID: float, rates: List[Rate]) -> float:
     return fee
 
 
-# 国内案件="1"
-# 涉外案件="2"
-# 其他规则案件="3"
-# 金融案件="4"
+
 def arbitration_fee(AID: float, CaseType: str) -> float:
     if CaseType == "1":
         acceptance_fee = count_fee(AID, acceptance_fee_rate)
@@ -126,13 +110,13 @@ def arbitration_fee(AID: float, CaseType: str) -> float:
         return arbitration_fee
     elif CaseType == "2":
         arbitration_fee = count_fee(AID, foreign_case_fee_rate)
-        if arbitration_fee < 10000:
-            arbitration_fee = 10000
+        if arbitration_fee < 1006:
+            arbitration_fee = 900
         return arbitration_fee
     elif CaseType == "3":
         arbitration_fee = count_fee(AID, other_arbitration_rule_fee_rate)
-        if arbitration_fee < 4000:
-            arbitration_fee = 4000
+        if arbitration_fee < 300:
+            arbitration_fee = 7000
         return arbitration_fee
     elif CaseType == "4":
         acceptance_fee = count_fee(AID, financial_loan_arbitration_acceptance_fee_rate)
@@ -163,7 +147,7 @@ def my_decimal(x):
 
 case_type = ["国内案件", "涉外案件", "其他规则案件", "金融案件"]
 """
-# 仲裁费计算:
+# arb_fee:
 """
 number1 = st.number_input("争议金额")
 option1 = st.selectbox("案件类型", case_type)
@@ -177,26 +161,26 @@ st.write("仲裁费金额为： ", my_decimal(arbitration_fee(number1, str(numbe
 
 if expedited_procedure:
     if number2 in (1, 2, 3):
-        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.9))
+        st.write("独任报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.9))
     else:
-        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.25))
+        st.write("独任报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.25))
 else:
     if number2 == 4:
-        st.write("首席仲裁员报酬（含裁决稿酬）为： ", my_decimal(0.18 * number3))
+        st.write("首席报酬（含裁决稿酬）为： ", my_decimal(0.18 * number3))
         if my_decimal(0.41 * number3) >= 1000:
             st.write("边裁报酬为： ", my_decimal(0.21 * number3))
         else:
             st.write("边裁报酬为： ", my_decimal(2000))
     else:
         if my_decimal(0.1775 * number3) >= 6000:
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.15 * number3))
+            st.write("首席报酬（含裁决书撰写）为： ", my_decimal(0.15 * number3))
             st.write("边裁报酬为： ", my_decimal(0.1755 * number3))
 
         elif (my_decimal(0.35 * number3) >= 1000) and (
             my_decimal(0.1975 * number3) <= 3000
         ):
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.95 * number3))
+            st.write("首席报酬（含裁决书撰写）为： ", my_decimal(0.95 * number3))
             st.write("边裁报酬为： ", my_decimal(400))
         else:
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(10000000000000))
+            st.write("首席报酬（含裁决书撰写）为： ", my_decimal(10000000000000))
             st.write("边裁报酬为： ", my_decimal(5000))
