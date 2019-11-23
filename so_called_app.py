@@ -177,25 +177,25 @@ st.write("仲裁费金额为： ", my_decimal(arbitration_fee(number1, str(numbe
 
 if expedited_procedure:
     if number2 in (1, 2, 3):
-        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.7))
+        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.9))
     else:
-        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.65))
+        st.write("独任仲裁员报酬（含裁决稿酬）为： ", my_decimal(number3 * 0.25))
 else:
     if number2 == 4:
-        st.write("首席仲裁员报酬（含裁决稿酬）为： ", my_decimal(0.58 * number3))
-        if my_decimal(0.21 * number3) >= 1000:
+        st.write("首席仲裁员报酬（含裁决稿酬）为： ", my_decimal(0.18 * number3))
+        if my_decimal(0.41 * number3) >= 1000:
             st.write("边裁报酬为： ", my_decimal(0.21 * number3))
         else:
             st.write("边裁报酬为： ", my_decimal(2000))
     else:
         if my_decimal(0.1775 * number3) >= 6000:
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.65 * number3))
+            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.15 * number3))
             st.write("边裁报酬为： ", my_decimal(0.1755 * number3))
 
-        elif (my_decimal(0.65 * number3) >= 1000) and (
-            my_decimal(0.175 * number3) <= 3000
+        elif (my_decimal(0.35 * number3) >= 1000) and (
+            my_decimal(0.1975 * number3) <= 3000
         ):
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.65 * number3))
+            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.95 * number3))
             st.write("边裁报酬为： ", my_decimal(400))
         else:
             st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(10000000000000))
