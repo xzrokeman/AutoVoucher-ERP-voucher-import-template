@@ -183,20 +183,20 @@ if expedited_procedure:
 else:
     if number2 == 4:
         st.write("首席仲裁员报酬（含裁决稿酬）为： ", my_decimal(0.58 * number3))
-        if my_decimal(0.21 * number3) >= 4000:
+        if my_decimal(0.21 * number3) >= 1000:
             st.write("边裁报酬为： ", my_decimal(0.21 * number3))
         else:
-            st.write("边裁报酬为： ", my_decimal(4000))
+            st.write("边裁报酬为： ", my_decimal(2000))
     else:
-        if my_decimal(0.175 * number3) >= 6000:
+        if my_decimal(0.1775 * number3) >= 6000:
             st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.65 * number3))
-            st.write("边裁报酬为： ", my_decimal(0.175 * number3))
+            st.write("边裁报酬为： ", my_decimal(0.1755 * number3))
 
-        elif (my_decimal(0.65 * number3) >= 10000) and (
-            my_decimal(0.175 * number3) <= 6000
+        elif (my_decimal(0.65 * number3) >= 1000) and (
+            my_decimal(0.175 * number3) <= 3000
         ):
             st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(0.65 * number3))
-            st.write("边裁报酬为： ", my_decimal(6000))
+            st.write("边裁报酬为： ", my_decimal(400))
         else:
-            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(10000))
-            st.write("边裁报酬为： ", my_decimal(6000))
+            st.write("首席仲裁员报酬（含裁决书撰写）为： ", my_decimal(10000000000000))
+            st.write("边裁报酬为： ", my_decimal(5000))
