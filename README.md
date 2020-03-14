@@ -1,17 +1,18 @@
-# AutoVoucher-ERP-voucher-import-template-
-## 出发点
-主要是为了根据银行流水生成简单的会计凭证导入模板（仅针对"大量、简单、重复"的付现费用类业务）。  
-对于一个新手（主职是会计）来说最关注的不是代码质量（顶用最重要），节省（做账）时间，减少人工失误才是主要目的。  
-这里的所有方法都是ERP早已实现的功能，因为资源限制没法通过采购来实现，单位的开发力量主要不用于支持财务，所以自力更生、特别擅长半自动处理成为了必备素质-_-#  
-凭证生成规则其实是主流ERP都有的功能，客观原因导致现在只能用一款20多年前架构的老爷软件做账，为了保护视力……  
+# Python scripts for accounting
+## What I know about accounting and programming
+The profession of accounting is all about recognition, measuring, recording and reporting. And above all can be summarized as proper classification of business transactions. To classify the transactions we need Accounting Standards or Taxonomy(as they called it in XBRL). Basically these are rules so that book-keeping and reporting must compliant to. In greater sense, the rules include not only the standards, but processes performed daily as well(in the realm of internal control). As long as there are rules(most of them are very simple), there are situations programming could step in. ERPs have been around for quite a long time, yet they leave many problems unsolved. However, with few lines of code, my life as an accountant is becoming much easier.
 
-    1. 已经实现最简单的费用根据流水（from Excel）生成两行的凭证（借费用贷银行）并追加到一个凭证序时簿（to Excel）；
-    2. 针对不同的分录科目生成多行后续分录（如需要走中间科目“应付职工薪酬”的情形），这一块儿现在是通过不同分支写死分录来实现的，因为还没有想清楚构建一个什么框架来反映这类业务的实质。先利用pandas和xslxwriter对表格的操作做一些简单的预处理，达到目的即可；
-    3. 无论是通过原生Python还是通过SQLAlchemy来定义上述两个类都比较繁琐，偶然看到了attrs, dataclasses库的介绍，所以做了一些改进；由于Python的类可以很方便地字典化，所以总体思路调整为：
-        i. 运用@attrs或@dataclasses定义类
-        ii. 将JournalEntry类属性字典化（vars），利用pandas生成DataFrame
-        iii. 后续数据库操作可以考虑使用SQLAlchemy
-        iiii. 考虑为批量excel导入银行日记账写一个方法（20190620）
+What I have learned from accounting practice is that accountants are way too behind what was decribed in an "Intermediate Accounting" text book. Accountant is nothing about management if you spend all day entering the entries, so bear in mind to let others or a machine to do the basics for you.
+## The aim of this repo
+为了将手头的核算工作完全自动化而不依赖于任何特定的ERP产品
+
+目前已完成的：1.单据转换规则（根据业务单据生产成会计凭证）；2.银行对账；3.批量新增核算项目（直接改数据库）
+
+提上日程的：1.自动报表（标准格式表及图表）；2.出纳日记账（用django实现）
+
+长期目标：1.数据同步（从业务系统获取新的业务信息并同步到ERP基础资料中）；2.整合工具包中的所有功能，形成一套文档；3.财务数据对接XBRL
+
+这里的所有方法都是ERP早已实现的功能，因为资源限制没法通过采购来实现，单位的开发力量主要不用于支持财务，所以自力更生、特别擅长半自动处理成为了必备素质-_-#  
 
 2020-3-13
 
