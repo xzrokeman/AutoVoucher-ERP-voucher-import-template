@@ -16,4 +16,4 @@ What I have learned from accounting practice is that accountants are way too beh
 
 2020-3-13
 
-银行对账问题有了一个当前所掌握技能条件下的最优解：pandas的groupby和merge方法。这个问题在sql下早已得到解决，即两张表根据一个或多个字段实现纪录的一一对应。
+银行对账问题有了一个当前所掌握技能条件下的最优解：pandas的groupby和merge方法。这个问题在sql下早已得到解决，即两张表根据一个或多个字段实现记录的一一对应。
