@@ -103,7 +103,8 @@ high|star|?
 S|增长战略SO|多种经营ST
 W|扭转战略WO|防御WT
 
-`ps`$$\frac{e^n}{n-1}$$
+
+$$\frac{e^n}{n-1}$$
 
 ```python
 from dataclasses import dataclass
