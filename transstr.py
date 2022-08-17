@@ -43,7 +43,11 @@ def CaseCode(string: Any) -> str:#调整案号，接收参数必须为规范的�
         else:
             return CasePrefix(string) + str(CaseNum(string))
 
-
+# see pandas.DataFrame.combine_first, while func "combine" and "combine_first"
+# only works for number types(int32, int64, float32, float64)
+# these two don't work on object type or string type
+# the workaround is using numpy.array instead coz it's much more flexible
+# you can operate a numpy.array like a python List
 def Xfill_null(a: str, b: str, df: pd.DataFrame) -> pd.DataFrame: 
     x: np.array = df[a].to_numpy()
     y: np.array = df[b].to_numpy()
