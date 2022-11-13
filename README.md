@@ -24,3 +24,6 @@ What I have learned from accounting practice is that accountants are way too beh
 
   2022-7-31  
 调通了金蝶EAS凭证接口，包括且不限于凭证引入，凭证查询，凭证删除等等。基本扫清了纯python环境自动做账的主要障碍。
+
+  2022-11-13  
+写完了内网下载的一个初级方案，没有上多线程，没有完善下载后的文件处理，仅仅堪堪能降低一下年底的工作强度。  
