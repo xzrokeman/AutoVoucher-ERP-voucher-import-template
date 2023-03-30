@@ -27,3 +27,6 @@ What I have learned from accounting practice is that accountants are way too beh
 
   2022-11-13  
 写完了内网下载的一个初级方案，没有上多线程，没有完善下载后的文件处理，仅仅堪堪能降低一下年底的工作强度。  
+  
+  2023-3-30  
+使用selenium强调了异常处理的重要性，后续优化过程中又学到了很多。pdfCropper算是真正意义上写来分发给同事使用的本地应用，当然主要的动机还是我没法等那么久。如果要用pyinstaller打包，切勿使用绝对路径。此外`copy.deepcopy`这类不甚了解的方法在使用前应当更加慎重。充分理解深拷贝需要对C以及GC机制有更多的了解，暂时还没必要去探究这个坑。
