@@ -27,12 +27,12 @@ def CaseCode(string: Any) -> str:#调整案号，接收参数必须为规范的�
                 return "#NOT A CASE"
             
         def CaseNum(string: str) -> str:
-            if len(reduce(lambda x, y: x + y, re.findall(r"\d+\.?\d*",string))) < 5:
+            if len(reduce(lambda x, y: x.join(y), re.findall(r"\d+\.?\d*",string))) < 5:
                 return ""
             else:
-                numbers = str(reduce(lambda x, y: x + y, re.findall(r"\d+\.?\d*",string)))
+                numbers = str(reduce(lambda x, y: x.join(y), re.findall(r"\d+\.?\d*",string)))
                 if len(numbers) < 8:
-                    numbers = numbers[0:4]+"0"*(8-len(numbers))+numbers[4:]
+                    numbers = numbers[0:4].join("0"*(8-len(numbers))).join(numbers[4:])
                     return numbers
                 else:
                     return numbers[0:8]
@@ -41,7 +41,7 @@ def CaseCode(string: Any) -> str:#调整案号，接收参数必须为规范的�
         if CasePrefix(string) == "#NOT A CASE":
             return string
         else:
-            return CasePrefix(string) + str(CaseNum(string))
+            return CasePrefix(string).join(str(CaseNum(string)))
 
 # see pandas.DataFrame.combine_first, while func "combine" and "combine_first"
 # only works for number types(int32, int64, float32, float64)
